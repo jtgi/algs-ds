@@ -34,7 +34,7 @@ import java.util.*;
    *
    * If number of items is 0 or the weight is 0, the solution is 0.
    * If the item weighs more than the max weight use our previous best weight
-   * Otherwise take the max of using the item or not using the previous result.
+   * Otherwise take the max of using the item or just using the previous result.
    *
    * Which we can state more eloquently with a recurrence relation:
    *
