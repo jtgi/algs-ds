@@ -1,6 +1,9 @@
 import java.util.*;
 
   /*
+   *
+   * Thurs, Dec 4, 2014 ===
+   *
    * 0 1 Knapsack Problem
    * Given n items with corresponding benefit and weight, and given 
    * a maximum weight w, we attempt to find the set of items S
@@ -53,23 +56,26 @@ import java.util.*;
    * Thus we can use a dynamic programming approach to cache intermediate
    * results reducing an otherwise O(2^n) solution to O(n*w).
    *
+   * Damn Java, this took a lot of code.
    */
 
 public class Knapsack {
 
   public Knapsack() { /* empty */}
 
+  /*
+   * Iteratively we solve this by building up a weights X benefits
+   * matrix in typical dynamic programming style. We use this
+   * to cache our previous results and make note of each item
+   * we include. A final pass over the matrix
+   * is done to build up and return the result.
+   */
   public ArrayList<KnapsackItem> solveIter(int[] weights, int[] benefits, int maxWeight) {
     int numItems = weights.length;
 
     ArrayList<KnapsackItem> results = new ArrayList<KnapsackItem>();
     int[][] solution = new int[numItems][maxWeight+1];
     boolean[][] take = new boolean[numItems][maxWeight+1];
-
-    for(int x = 1; x < numItems; x++) {
-      weights[x] = (int) (Math.random() * maxWeight);
-      benefits[x] = (int) (Math.random() * (maxWeight * maxWeight));
-    }
 
     for(int n = 1; n < numItems; n++) {
       for(int w = 1; w <= maxWeight; w++) {
@@ -86,7 +92,12 @@ public class Knapsack {
       }
     }
 
-    for(int i = numItems-1, j = maxWeight; i > 0; i--) {
+    return buildResult(weights, benefits, take, maxWeight);
+  }
+
+  private ArrayList<KnapsackItem> buildResult(int[] weights, int[] benefits, int[] take, int maxWeight) {
+
+    for(int i = weights.length-1, j = maxWeight; i > 0; i--) {
       if(take[i][j]) {
         results.add(new KnapsackItem(i, weights[i], benefits[i], true));
         j = j-weights[i];
