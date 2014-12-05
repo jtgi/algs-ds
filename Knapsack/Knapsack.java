@@ -95,7 +95,9 @@ public class Knapsack {
     return buildResult(weights, benefits, take, maxWeight);
   }
 
-  private ArrayList<KnapsackItem> buildResult(int[] weights, int[] benefits, int[] take, int maxWeight) {
+  private ArrayList<KnapsackItem> buildResult(int[] weights, int[] benefits, boolean[][] take, int maxWeight) {
+
+    ArrayList<KnapsackItem> results = new ArrayList<KnapsackItem>();
 
     for(int i = weights.length-1, j = maxWeight; i > 0; i--) {
       if(take[i][j]) {
