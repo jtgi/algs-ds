@@ -34,7 +34,7 @@ public class MaxSubArray {
     int currMax = arr[0];
     int bestMax = arr[0];
     
-    for(int i = 0; i < arr.length; i++) {
+    for(int i = 1; i < arr.length; i++) {
       currMax = Math.max(currMax, currMax + arr[i]);
       bestMax = Math.max(currMax, bestMax);
     }
@@ -44,7 +44,7 @@ public class MaxSubArray {
 
   public static int solveRecur(int[] arr) {
     if(arr.length < 1) return Integer.MIN_VALUE;
-    else return solveRecurHelper(arr, arr[0], arr[0], 0);
+    else return solveRecurHelper(arr, arr[0], arr[0], 1);
   }
 
   private static int solveRecurHelper(int[] arr, int currMax, int bestMax, int i) {
