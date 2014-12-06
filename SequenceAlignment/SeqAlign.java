@@ -89,36 +89,8 @@ public class SeqAlign {
   }
 
   /*
-   * Recursive Implementation.
-   * Good for understanding how to convert a recurrence
-   * to recursion. Especially as indexes are often glossed
-   * over in recurrences. 
-   *
-   * However, this function is otherwise effectively useless.
-   *
-   * Running time: O(2^n) 
-   */
-  public static int solveNaive(String n, String m) {
-    return solveRecur(n, m, n.length()-1, m.length()-1);
-  }
-
-  public static int solveRecur(String n, String m, int i, int j) {
-    if(i < 0 && j < 0) return 0;
-    if(i < 0) return (j+1) * gapPenalty;
-    if(j < 0) return (i+1) * gapPenalty;
-
-    int matchScore = (n.charAt(i) == m.charAt(j)) ? matchBenefit : mismatchPenalty;
-
-    int leaveIt = solveRecur(n, m, i-1, j-1) + matchScore;
-    int addGapN = solveRecur(n, m, i-1, j) + gapPenalty;
-    int addGapM = solveRecur(n, m, i, j-1) + gapPenalty;
-
-    return Math.max(leaveIt, Math.max(addGapN, addGapM));
-  }
-
-  /*
    * Recursive implementation with caching.
-   * I prefer the iterative version. Indexing gets ugly
+   * Indexing gets ugly
    * as I use length of strings in 0-based arrays and as
    * bounds. Plus alloc'ing stack frames in quadratic alg
    * is no good with a VM that doesn't support tail calls
@@ -135,20 +107,7 @@ public class SeqAlign {
     for(int[] row : cache)
       Arrays.fill(row, Integer.MIN_VALUE);
 
-    return solveWithCacheHelper(paddedN, paddedM, paddedN.length()-1, paddedM.length()-1, cache);
-  }
-
-  /*
-   * Init array to some default val, before computing value
-   * check to see if we already have, if so just return the
-   * cached result.
-   */
-  private static int solveWithCacheHelper(String n, String m, int i, int j, int[][] cache) {
-    if(cache[i][j] == Integer.MIN_VALUE) {
-      cache[i][j] = solveWithCacheCompute(n, m, i, j, cache);
-    }
-
-    return cache[i][j];
+    return solveWithCacheCompute(paddedN, paddedM, paddedN.length()-1, paddedM.length()-1, cache);
   }
 
   /* 
@@ -156,28 +115,28 @@ public class SeqAlign {
    * and not itself.
    */
   private static int solveWithCacheCompute(String n, String m, int i, int j, int[][] cache) {
+    if(cache[i][j] != Integer.MIN_VALUE) return cache[i][j];
     if(i == 0 && j == 0) return 0;
     if(i == 0) return (j) * gapPenalty;
     if(j == 0) return (i) * gapPenalty;
 
     int matchScore = (n.charAt(i) == m.charAt(j)) ? matchBenefit : mismatchPenalty;
 
-    int leaveIt = solveWithCacheHelper(n, m, i-1, j-1, cache) + matchScore;
-    int addGapN = solveWithCacheHelper(n, m, i-1, j, cache) + gapPenalty;
-    int addGapM = solveWithCacheHelper(n, m, i, j-1, cache) + gapPenalty;
+    int leaveIt = solveWithCacheCompute(n, m, i-1, j-1, cache) + matchScore;
+    int addGapN = solveWithCacheCompute(n, m, i-1, j, cache) + gapPenalty;
+    int addGapM = solveWithCacheCompute(n, m, i, j-1, cache) + gapPenalty;
 
-    return Math.max(leaveIt, Math.max(addGapN, addGapM));
+    cache[i][j] = Math.max(leaveIt, Math.max(addGapN, addGapM));
+    return cache[i][j];
   }
 
   public static void main(String[] args) {
-    String n = "hello";
-    String m = "ello";
+    String n = "hellosadfalkjdafdlk;ajsdfas";
+    String m = "elloasdfsaddfasdfasdksdfas";
 
     int scoreDp = solve(n, m);
-    int score = solveNaive(n, m);
     int scoreWithCache = solveWithCache(n, m);
 
-    System.out.println(String.format("Score for '%s', '%s': %d", n, m, score));
     System.out.println(String.format("Score for '%s', '%s': %d", n, m, scoreDp));
     System.out.println(String.format("Score for '%s', '%s': %d", n, m, scoreWithCache));
   }
