@@ -7,17 +7,8 @@ public class LongestCommonSubsequence {
 
     public static String lcs(String m, String n) {
         int[][] matrix = new int[m.length()+1][n.length()+1];
-        fillMatrix(matrix, 0, m.length(), n.length());
         findCommonChars(matrix, m, n);
         return findPath(matrix, " " + m, " " + n, m.length(), n.length());
-    }
-
-    private static void fillMatrix(int[][] matrix, int value, int maxX, int maxY) {
-        for(int i = 0; i < maxX; i++) {
-            for(int j = 0; j < maxY; j++) {
-                matrix[i][j] = value;
-            }
-        }
     }
 
     public static void findCommonChars(int[][] matrix, String m, String n) {
