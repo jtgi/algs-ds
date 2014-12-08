@@ -62,10 +62,25 @@ public class SeqAlign {
    * Typical DP style. Watch those indexes though;
    * they be tricky.
    */ 
-  public static int solve(String n, String m) {
+  public static void solve(String n, String m) {
     int nlen = n.length();
     int mlen = m.length();
+
     int[][] maxAlign = new int[nlen + 1][mlen + 1];
+    score(n, m, maxAlign);
+
+    int maxLen = Math.max(nlen, mlen);
+    char[] out1 = new char[maxLen];
+    char[] out2 = new char[maxLen];
+
+    backtrack(n, m, maxAlign, nlen, mlen, out1, out2);
+
+    System.out.println(String.format("%s \n %s", new String(out1), new String(out2)));
+  }
+
+  public static int score(String n, String m, int[][] maxAlign) {
+    int nlen = n.length();
+    int mlen = m.length();
 
     for(int q = 0; q <= nlen; q++) 
       maxAlign[q][0] = q * gapPenalty;
@@ -86,6 +101,29 @@ public class SeqAlign {
     }
 
     return maxAlign[nlen][mlen];
+  }
+
+  /*
+   * We return void here and use some state 
+   * because no tuples and dont want to write again
+   */
+  public static void backtrack(String n, String m, int[][] scores, int i, int j, char[] out1, char[] out2) {
+    while(i > 0 && j > 0) {
+
+      if(i > 0 && scores[i-1][j] + gapPenalty == scores[i][j]) {
+        out1[i] = n.charAt(i-1);
+        out2[j] = '-';
+        i--;
+      } else if(j > 0 && scores[i][j-1] + gapPenalty == scores[i][j]) {
+        out1[i] = '-';
+        out2[j] = n.charAt(j-1);
+        j--;
+      } else {
+        out1[i] = n.charAt(i-1);
+        out2[j] = m.charAt(j-1);
+        i--; j--;
+      }
+    }
   }
 
   /*
@@ -134,10 +172,7 @@ public class SeqAlign {
     String n = "hellosadfalkjdafdlk;ajsdfas";
     String m = "elloasdfsaddfasdfasdksdfas";
 
-    int scoreDp = solve(n, m);
-    int scoreWithCache = solveWithCache(n, m);
-
-    System.out.println(String.format("Score for '%s', '%s': %d", n, m, scoreDp));
-    System.out.println(String.format("Score for '%s', '%s': %d", n, m, scoreWithCache));
+    solve(n, m);
+    solveWithCache(n, m);
   }
 }
