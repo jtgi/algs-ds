@@ -1,16 +1,33 @@
 import java.util.*;
 
 /*
- * Write a function called eval, which takes 
- * a string and returns a boolean. This string 
- * is allowed 6 different characters: 0, 1, &, 
- * |, (, and ). Eval should evaluate the 
- * string as a boolean expression, where 
- * 0 is false, 1 is true, & is an and, and | 
- * is an or. An example string might look 
- * like "(0 | (1 | 0)) & (1 & ((1 | 0) & 0))"
+ * The Challenge
+ * ------------
+ * Evaluate: (0 | (1 | 0)) & (1 & ((1 | 0) & 0))
+ * where 0 = false
+ *       1 = true
+ *       | = OR
+ *       & = AND
+ *
+ * We can eval this by writing an extremely basic
+ * recursive descent parser with the following grammar:
+ *
+ * <expr>  ::= <number> | <expr> <binop> <expr>
+ * <binop> ::= '&' | '|'
+ *
+ * The interesting parts of the implementation implement
+ * Expr's eval();
+ *
+ * interface Expr
+ * BoolExpr(boolean val) implements Expr
+ * BinopExpr(BinopExpr left, char op, BinopExpr right) implements Expr
+ *
+ * Our parser builds up an AST returning one
+ * expression which is evaluated recursively yielding a result.
+ *
  */
 public class Interp {
+
   private static int cursor = 0; 
 
   public static Expr parse(String in) {
