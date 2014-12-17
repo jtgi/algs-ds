@@ -55,16 +55,69 @@ public class CommonSubstringN {
     return false;
   }
 
+  /*
+   * Recursive Version, cleaner :D
+   */
+  public static boolean solve2(String s1, String s2, int n) {
+    String shorter = s1.length() < s2.length() ? s1 : s2;
+    String longer = s1.length() < s2.length() ? s2 : s1;
+
+    if(shorter.length() < n) return false;
+    return containsSequence(longer, shorter.substring(0, n)) || solve2(s1, s2.substring(n), n);
+  }
+
+  /*
+   * ABC
+   * ABABABCAB
+   * 010101201
+   * 012345678
+   *
+   * if our counter ever gets to len of pattern return
+   * index - counter.
+   *
+   * if a character does not match resume counter from
+   * last unmatched location with beginning of pattern
+   *
+   * Checks if n is contained within m. If so,
+   * returns the index of the starting position
+   * of the substring. Otherwise returns -1
+   *
+   * O(|text|)
+   *
+   */
+  public static int indexOf(String pattern, String text) {
+    int i = 0;
+    int j = 0;
+
+    while(i < text.length()) {
+      if(pattern.charAt(j) == text.charAt(i)) {
+        j++;
+
+        if(j == pattern.length()) {
+          int result = (i+1) - j;
+          return result;
+        }
+      } else if(j != 0){
+        j = 0;
+        continue;
+      }
+
+      i++;
+    }
+
+    return -1;
+  }
+
   public static boolean containsSequence(String s, String pattern) {
-    return s.indexOf(pattern) != -1;
+    return indexOf(pattern, s) != -1;
   }
 
   public static void main(String[] args) {
-    System.out.println(String.format("Check substr: t %b", solve("ABCD", "CD", 2)));
-    System.out.println(String.format("Check substr: t %b", solve("ABCD", "BC", 2)));
-    System.out.println(String.format("Check substr: t %b", solve("ABCD", "AB", 2)));
-    System.out.println(String.format("Check substr: f %b", solve("ABCD", "DE", 2)));
-    System.out.println(String.format("Check substr: f %b", solve("ABCD", "DE", 2)));
+    System.out.println(String.format("Check substr: t %b", solve2("ABCD", "CD", 2)));
+    System.out.println(String.format("Check substr: t %b", solve2("ABCD", "BC", 2)));
+    System.out.println(String.format("Check substr: t %b", solve2("ABCD", "AB", 2)));
+    System.out.println(String.format("Check substr: f %b", solve2("ABCD", "DE", 2)));
+    System.out.println(String.format("Check substr: f %b", solve2("ABCD", "DE", 2)));
   }
 
 }
