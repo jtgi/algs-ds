@@ -85,8 +85,7 @@ public class ListGraph extends Graph {
     System.out.println(String.format("Edge from n1 to n2? %b", g.hasEdge(n1, n2)));
     System.out.println(String.format("Edge from n2 to n3? %b", g.hasEdge(n2, n3)));
     System.out.println(String.format("Edge from n3 to n4? %b", g.hasEdge(n3, n4)));
+
   }
-
-
 
 }
