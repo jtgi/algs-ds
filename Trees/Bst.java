@@ -43,8 +43,6 @@ public class Bst {
                                           new Bst(20, null, 
                                               new Bst(25, null, null))));
 
-
-
     System.out.println(String.format("balanced bst: %b", isBalanced(balanced)));
     System.out.println(String.format("unbalanced bst: %b", isBalanced(unbalanced)));
     System.out.println(String.format("balanced OOP bst: %b", balanced.isBalanced()));
