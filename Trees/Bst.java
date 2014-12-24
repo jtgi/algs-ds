@@ -33,6 +33,50 @@ public class Bst {
     return new Bst(arr[mid], left, right);
   }
 
+  /*              5
+   *            2   10
+   *          1    7  15
+   *
+   *          5
+   *          2 -> 10
+   *          1 -> 7 -> 15
+   */
+  public static ArrayList<LinkedList<Bst>> createLevelOrderLinkedList(Bst root) {
+    ArrayList<LinkedList<Bst>> lsts = new ArrayList<LinkedList<Bst>>();
+    Queue<Bst> q1 = new LinkedList<Bst>();
+    Queue<Bst> q2 = new LinkedList<Bst>();
+
+    LinkedList<Bst> rootList = new LinkedList<Bst>();
+    rootList.add(root);
+    lsts.add(rootList);
+
+    q1.add(root);
+
+    while(!q1.isEmpty()) {
+      Bst top = q1.poll();
+
+      if(top.left != null) {
+        q2.add(top.left);
+      }
+
+      if(top.right != null) {
+        q2.add(top.right);
+      }
+
+      if(q1.isEmpty()) {
+        if(q2.size() > 0) {
+          lsts.add(new LinkedList<Bst>(q2));
+        }
+
+        Queue<Bst> tmp = q1;
+        q1 = q2;
+        q2 = q1;
+      }
+    }
+
+    return lsts;
+  }
+
   public boolean isBalanced() {
     int leftHeight = (left == null) ? 0 : left.height();
     int rightHeight = (right == null) ? 0 : right.height();
@@ -72,6 +116,15 @@ public class Bst {
     return buff.toString();
   }
 
+  public static void printLevelOrderList(ArrayList<LinkedList<Bst>> lsts) {
+    for(LinkedList<Bst> lst : lsts) {
+      for(Bst b : lst) {
+        System.out.print(b.value + ", ");
+      }
+      System.out.println();
+    }
+  }
+
   public static void main(String[] args) {
     Bst balanced = new Bst(10,
         new Bst(5, null, null), new Bst(15, null, null));
@@ -89,6 +142,10 @@ public class Bst {
     Bst balancedBst = Bst.createBalancedBst(new int[] { 5, 4, 2, 3, 8 });
     System.out.println(balancedBst.toString());
     System.out.println(String.format("Balanced bst is balanced? %b", balancedBst.isBalanced()));
+
+    ArrayList<LinkedList<Bst>> lsts = createLevelOrderLinkedList(unbalanced);
+    printLevelOrderList(lsts);
+
   }
 
 }

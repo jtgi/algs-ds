@@ -14,11 +14,6 @@ public class Tree {
     this.visited = 0;
   }
 
-  /*
-   *       ^ 1 =>
-   *       |     2
-   *         3 <-
-   */
   public static boolean pathExists(Tree src, Tree dst) {
     return bfs(src, dst) != null;
   }
