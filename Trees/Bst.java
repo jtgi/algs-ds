@@ -125,6 +125,88 @@ public class Bst {
     }
   }
 
+    /*
+     * lca is the node that contains 
+     *
+     *         10
+     *       5    15
+     *     2  7  11 20
+     *
+     *     case 1:   node's left contains b1 and node's right contains b2, return b1
+     *     case 1.1: node is b1 and contains b2 in right or left subtree
+     *                 return b1.parent
+     *     case 1.2: node is b2 and contains b1 in right or left subtree
+     *                 return b2.parent
+     *     case 2:   node's left contains both b1 and b2
+     *               explore left
+     *     case 3:   node's right contains both b1 and b2
+     *               explore right
+     *
+     *     OR
+     *
+     *     we can model this problem as a directed acyclic graph
+     *     we run a search on each node keeping track of its parent
+     *     at each decision point.
+     *     we are then given a link list containing the path to 
+     *     each one if its trees
+     *     then compare both lists starting from the root the first
+     *     node where they differ or the last node is the lca.
+     *   
+     */
+
+  public static Bst lca(Bst root, Bst b1, Bst b2) {
+    ArrayList<Bst> pathb1 = findPath(root, b1, new ArrayList<Bst>());
+    ArrayList<Bst> pathb2 = findPath(root, b2, new ArrayList<Bst>());
+
+    if(pathb1 == null || pathb2 == null) return null;
+
+    int i = 0;
+    while(i < pathb1.size() && i < pathb2.size()) {
+      if(pathb1.get(i) != pathb2.get(i)) {
+        return pathb1.get(i-1);
+      }
+      i++;
+    }
+
+    return null;
+  }
+
+  /*
+   *        5
+   *      3   10
+   *    0  4 9  20
+   */
+
+  public static ArrayList<Bst> findPath(Bst root, Bst target, ArrayList<Bst> path) {
+    path.add(root);
+
+    if(root.value == target.value)  {
+      return path;
+    }
+
+    if(root.left != null) {
+      ArrayList<Bst> leftPath = findPath(root.left, target, new ArrayList<Bst>());
+      if(leftPath.contains(target)) {
+        path.addAll(leftPath);
+      }
+    }
+
+    if(root.right != null) {
+      ArrayList<Bst> rightPath = findPath(root.right, target, new ArrayList<Bst>());
+      if(rightPath.contains(target)) {
+        path.addAll(rightPath);
+      }
+    }
+
+    return path;
+  }
+
+  public boolean equals(Object other) {
+    if(this == other) return true;
+    Bst otherBst = (Bst) other;
+    return this.value == otherBst.value;
+  }
+
   public static void main(String[] args) {
     Bst balanced = new Bst(10,
         new Bst(5, null, null), new Bst(15, null, null));
@@ -146,6 +228,8 @@ public class Bst {
     ArrayList<LinkedList<Bst>> lsts = createLevelOrderLinkedList(unbalanced);
     printLevelOrderList(lsts);
 
+    Bst result = lca(unbalanced, new Bst(5, null, null), new Bst(15, null, null));
+    System.out.println("Value " + result.value);
   }
 
 }
