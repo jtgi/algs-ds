@@ -1,0 +1,59 @@
+(X) Dropbox
+  Write a function called eval, which takes a string and returns a boolean. This string is allowed 6 different characters: 0, 1, &, |, (, and ). Eval should evaluate the string as a boolean expression, where 0 is false, 1 is true, & is an and, and | is an or. An example string might look like "(0 | (1 | 0)) & (1 & ((1 | 0) & 0))"
+  TODO: Simpler version
+
+Facebook
+Design a data structure that supports insert, delete min, delete max, get min, and get max, all in log(n) time
+
+(X) Given a number n, return a number formed from the same 
+    digits of n that is the number right before n. Example: Given 1342, you must return the number 1324.
+
+(X) design a method store really large numbers that exceed 64 bits, 
+and then to write a method that can add two of these numbers.
+
+(X) check if two strings are anagrams
+
+(X) Given an array of integers, return all possible subsets of length n. 
+
+(X) Given a really big file with a lots of Facebook posts, find the ten most used words.
+
+(X) print link list in reverse
+
+(X) computer sqrt(x)
+
+(X) hasCheated(String s1,String s2, int N) that evaluates to true if two strings have a common substring of length N.
+
+3. Return the length of the longest sequence of increasing numbers in an unsorted array
+
+Given a bipartite graph, separate the vertices into two sets
+
+Convert a binary tree into a circular doubly linked list. 
+The order of the elements in the linked list have to be the order of elements you get when you do an in order traversal of the binary tree.
+
+Convert sorted array to BST
+
+jtgi - 
+- serialize and deserialize a graph
+- serialize a dfs after finding the first solution such that when deserialized
+  a second solution can be computed from the first solution.
+
+Given two Strings S1 and S2. Find the longest Substring which is a Prefix of S1 and suffix of S2. 
+
+Given a directory of files and folders (and relevant functions), how would you parse through it to find equivalent files?
+
+Question was "Given a pattern and a string - find if the string follows the same pattern Eg: Pattern : [a b b a], String : cat dog dog cat "o
+
+[HARD] Question was &quot;Given a pattern and a string input - find if   string follows the same pattern and return 0 or 1. Examples: 1) Pattern : "abba", input: "redblueredblue" should return 1. 2) Pattern: "aaaa", input: "asdasdasdasd" should return 1. 3) Pattern: "aabb", input: "xyzabcxzyabc" should return 0. 
+
+O(n) time O(1) space to print link list reversely.
+
+Given a list of 4 billion integers, find an integer not in the list using 4MB of memory.
+
+Given a list of strings, return a list of lists of strings that groups all anagrams. 
+
+FB
+Ex. given {trees, bike, cars, steer, arcs} 
+return { {cars, arcs}, {bike}, {trees, steer} } 
+
+m = # of words 
+n = length of longest word
