@@ -57,3 +57,33 @@ return { {cars, arcs}, {bike}, {trees, steer} }
 
 m = # of words 
 n = length of longest word
+
+Given a string of characters without spaces, is there a way to break the string into valid words without leftover characters.  
+
+
+
+Letters are represented by numbers, e.g.
+A = 1
+B = 2
+...
+J = 10
+K = 11
+etc.
+
+Given a number (e.g. 113), how many different combinations of letters could this be converted to? 
+
+Determine if two sets of numbers are overlapping. (1, 3) (2, 5) are overlapping.
+
+Questions
+
+    given a string, return the opposite of it, without changing the inner order of any word. for instance:
+
+    " abc" -> "abc "
+    " good morning" -> "morning good "
+
+
+2. Given a list of strings, return a list of lists of strings, which represents the list grouping strings by whether they are anagrams of one another.   View Answer
+
+LCA problem with no parent pointers. Given the root of a tree and pointers to two nodes contained in that tree, return the lowest common ancestor of the two nodes. IE, the common ancestor furthest from the root. 
+
+Given an array of integers, return all possible subsets of length n.
