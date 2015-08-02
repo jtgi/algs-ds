@@ -207,12 +207,38 @@ public class Bst {
     return this.value == otherBst.value;
   }
 
+  /*
+   * convert tree to list of lists
+   * # lists = height
+   * n nodes
+   *
+   *                5
+   *     
+   *           /         \
+   *           1          3
+   *         /   \      /   \
+   *        4     5    6    7   8
+   *       / \  / \  / \  / \ / \
+   *      1   2 3  4 5   6 7
+   *
+   * [5], [1, 3], [4, 5, 6 ,7]
+   * width_between_chars = 1space
+   * 
+   *
+   *
+   */
+
+  public static void prettyPrint(Bst root) {
+    ArrayList<LinkedList<Bst>> lsts = createLevelOrderLinkedList(root);
+    int level = height(root);
+    int width = Math.pow(2, level);
+  }
   public static void main(String[] args) {
     Bst balanced = new Bst(10,
         new Bst(5, null, null), new Bst(15, null, null));
 
     Bst unbalanced = new Bst(10,
-        new Bst(5, null, null), new Bst(15, null, 
+        new Bst(5, new Bst(3, null, null), null), new Bst(15, null, 
                                           new Bst(20, null, 
                                               new Bst(25, null, null))));
 

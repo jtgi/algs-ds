@@ -1,89 +1,52 @@
-(X) Dropbox
-  Write a function called eval, which takes a string and returns a boolean. This string is allowed 6 different characters: 0, 1, &, |, (, and ). Eval should evaluate the string as a boolean expression, where 0 is false, 1 is true, & is an and, and | is an or. An example string might look like "(0 | (1 | 0)) & (1 & ((1 | 0) & 0))"
-  TODO: Simpler version
+# Google
 
-Facebook
-Design a data structure that supports insert, delete min, delete max, get min, and get max, all in log(n) time
+After given clearly definition of UTF-8 format. ex: 1-byte: 0b0xxxxxxx 2- bytes:....
+Asked to write a function to validate whether the input is valid UTF-8.
+Input will be string/byte array, output should be yes/no.
 
-(X) Given a number n, return a number formed from the same 
-    digits of n that is the number right before n. Example: Given 1342, you must return the number 1324.
+Given an array of (unsorted) integers, arrange them such that a < b > c < d > e... etc.
 
-(X) design a method store really large numbers that exceed 64 bits, 
-and then to write a method that can add two of these numbers.
+Given a TV remote, write a script that would give   directions to input some letters. Starting from the upper left-hand corner. If the buttons were in 3 columns, and you wanted to type "feed", you would want the output of the program to say "right, right, down, PRESS, left, PRESS, PRESS, left, PRESS" 
 
-(X) check if two strings are anagrams
+This was one of the more standard questions. You have stairs with N number of steps. You can take either one step steps or two step steps; how many ways can you climb the stairs?
 
-(X) Given an array of integers, return all possible subsets of length n. 
+A string consists of ‘0’, ‘1’ and '?'. The question mark can be either '0' or '1'. Find all possible combinations for a string.
 
-(X) Given a really big file with a lots of Facebook posts, find the ten most used words.
+Give you a text file, remove duplicated lines.
+Follow up: If the file is very large, general hash map takes too much spaces, come up with a better solution.
 
-(X) print link list in reverse
+Two phone interviews. Does a given file name match a single-star pattern?
+index.html matches *.html
+foo.txt does not match *.html
 
-(X) computer sqrt(x)
+matches(“index.html”, “*html”) returns true
+matches(“foo.txt”, “*html”) returns false
+matches(“cat”, “c*t”) returns true
 
-(X) hasCheated(String s1,String s2, int N) that evaluates to true if two strings have a common substring of length N.
+Given infinitely numbers, for every number compute the average of the former k numbers.
 
-3. Return the length of the longest sequence of increasing numbers in an unsorted array
+Convert string to integer like atoi in C
 
-Given a bipartite graph, separate the vertices into two sets
+Write a function for -- Given a URL which has url-encoded name-values and a variable, return the value for it.
+Now modify the function to handle when the name appears multiple times. 
 
-Convert a binary tree into a circular doubly linked list. 
-The order of the elements in the linked list have to be the order of elements you get when you do an in order traversal of the binary tree.
+Phone interview 1:
+1. What is virtual function?
+2. What is the benefit of inherent?
+3. What is the advantage of interface in java?
+4. Write a program to reverse a linked list.
+5. Write a program to find the intersection of two sets and test your program.
 
-Convert sorted array to BST
+Phone interview 2:
+1. How to get k random samples in a large file of query key words?
+hints: partition the files into n trunks. Load the trunk into main memory.
 
-jtgi - 
-- serialize and deserialize a graph
-- serialize a dfs after finding the first solution such that when deserialized
-  a second solution can be computed from the first solution.
+Given two sorted lists of ordered tuples, combine them into one such that overlapping ranges are merged. For example: [ (1,4) , (10, 15) , (20, 24) ] and [ (3, 5) , (16, 17), (21, 23) ] becomes [ (1,5) , (10, 15) , (16, 17), (20, 24) ]  
 
-Given two Strings S1 and S2. Find the longest Substring which is a Prefix of S1 and suffix of S2. 
+We have a schedular. Timer is available to the schedular. The clients of this schedular want to call this schedular with 2 parameters, 1) time interval in ms 2) callback function. The schedular will invoke specified callback function after specified time intevals. Design data structure and implement it.  
 
-Given a directory of files and folders (and relevant functions), how would you parse through it to find equivalent files?
+Addition of 2 big numbers (represented by 2 int arrays, assuming each integer can only be 0-9) 
 
-Question was "Given a pattern and a string - find if the string follows the same pattern Eg: Pattern : [a b b a], String : cat dog dog cat "o
-
-[HARD] Question was &quot;Given a pattern and a string input - find if   string follows the same pattern and return 0 or 1. Examples: 1) Pattern : "abba", input: "redblueredblue" should return 1. 2) Pattern: "aaaa", input: "asdasdasdasd" should return 1. 3) Pattern: "aabb", input: "xyzabcxzyabc" should return 0. 
-
-O(n) time O(1) space to print link list reversely.
-
-Given a list of 4 billion integers, find an integer not in the list using 4MB of memory.
-
-Given a list of strings, return a list of lists of strings that groups all anagrams. 
-
-FB
-Ex. given {trees, bike, cars, steer, arcs} 
-return { {cars, arcs}, {bike}, {trees, steer} } 
-
-m = # of words 
-n = length of longest word
-
-Given a string of characters without spaces, is there a way to break the string into valid words without leftover characters.  
+Find if a binary tree is the sub-tree of another.  
 
 
-
-Letters are represented by numbers, e.g.
-A = 1
-B = 2
-...
-J = 10
-K = 11
-etc.
-
-Given a number (e.g. 113), how many different combinations of letters could this be converted to? 
-
-Determine if two sets of numbers are overlapping. (1, 3) (2, 5) are overlapping.
-
-Questions
-
-    given a string, return the opposite of it, without changing the inner order of any word. for instance:
-
-    " abc" -> "abc "
-    " good morning" -> "morning good "
-
-
-2. Given a list of strings, return a list of lists of strings, which represents the list grouping strings by whether they are anagrams of one another.   View Answer
-
-LCA problem with no parent pointers. Given the root of a tree and pointers to two nodes contained in that tree, return the lowest common ancestor of the two nodes. IE, the common ancestor furthest from the root. 
-
-Given an array of integers, return all possible subsets of length n.
